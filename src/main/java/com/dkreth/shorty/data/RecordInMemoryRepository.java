@@ -9,10 +9,10 @@ import java.util.Map;
 @Repository
 public class RecordInMemoryRepository {
     Map<String, Record> repo = new HashMap<>();
-    public Record saveRecord(Record record){
+    public Record insert(Record record){
         return repo.put(record.getShortId(), record);
     }
-    public Record getRecordByShortId(String shortId) {
+    public Record findByShortId(String shortId) {
         return repo.get(shortId);
     }
 }
