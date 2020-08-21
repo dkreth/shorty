@@ -32,3 +32,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Credentials ###
+config/application.properties
