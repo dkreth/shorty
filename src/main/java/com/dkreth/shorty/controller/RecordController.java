@@ -10,6 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 @RestController
 public class RecordController {
@@ -23,6 +24,12 @@ public class RecordController {
     @GetMapping("test")
     public Record testPath() {
         return new Record("test", "test");
+    }
+
+    @GetMapping("list")
+    public List<Record> list() {
+        List<Record> list = recordRepository.findAll();
+        return list;
     }
 
     @PostMapping("/generate")
