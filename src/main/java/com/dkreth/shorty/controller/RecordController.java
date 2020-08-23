@@ -15,9 +15,6 @@ import java.util.List;
 @RestController
 public class RecordController {
 
-    //TODO - change this to a MongoDB implementation
-//    private final RecordInMemoryRepository recordRepository = new RecordInMemoryRepository();
-
     @Autowired
     private RecordRepository recordRepository;
 
