@@ -53,6 +53,7 @@ public class RecordController {
         }
         return new ResponseEntity<>(url, HttpStatus.PERMANENT_REDIRECT);
     }
+
     @DeleteMapping("/{shortId}")
     public ResponseEntity delete(@PathVariable String shortId) {
         Record record = recordRepository.findByShortId(shortId);
@@ -62,4 +63,19 @@ public class RecordController {
         recordRepository.delete(record);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping("/{shortId}")
+    public ResponseEntity update(@PathVariable String shortId, @RequestBody Record newRecord) {
+        if (! shortId.equalsIgnoreCase(newRecord.getShortId())) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        Record foundRecord = recordRepository.findByShortId(shortId);
+        if (foundRecord == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        recordRepository.delete(foundRecord);
+        recordRepository.insert(newRecord);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
