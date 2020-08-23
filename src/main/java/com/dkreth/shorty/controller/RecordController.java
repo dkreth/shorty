@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 @RestController
 public class RecordController {
 
@@ -32,9 +35,18 @@ public class RecordController {
     }
 
     @GetMapping("/{shortId}")
-    public RedirectView redirect(@PathVariable String shortId) {
+    public ResponseEntity<URL> redirect(@PathVariable String shortId) {
         Record record = recordRepository.findByShortId(shortId);
-        //TODO - 404 if record is null
-        return new RedirectView("http://" + record.getLongUrl());
+        if (record == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        URL url;
+        try {
+            url = new URL("http://" + record.getLongUrl());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(url, HttpStatus.PERMANENT_REDIRECT);
     }
 }
