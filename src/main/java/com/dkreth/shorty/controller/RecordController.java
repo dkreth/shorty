@@ -53,4 +53,13 @@ public class RecordController {
         }
         return new ResponseEntity<>(url, HttpStatus.PERMANENT_REDIRECT);
     }
+    @DeleteMapping("/{shortId}")
+    public ResponseEntity delete(@PathVariable String shortId) {
+        Record record = recordRepository.findByShortId(shortId);
+        if (record == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        recordRepository.delete(record);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
