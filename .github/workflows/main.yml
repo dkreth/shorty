@@ -35,12 +35,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
+    - name: Run the app
+      run: ./gradlew bootRun
+
     - name: Run API Tests
       id: run-newman
       uses: anthonyvscode/newman-action@v1
       with:
         collection: postman_func_tests.json
         reporters: cli
+
+    - name: Stop the app
+      run: ./gradlew -stop
 
     - name: Output summary to console
       run: echo ${{ steps.run-api-tests.outputs.summary }}
