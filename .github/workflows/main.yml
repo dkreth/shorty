@@ -36,7 +36,9 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Run the app
-      run: ./gradlew bootRun
+      run: |
+        chmod 777 ./gradlew
+        ./gradlew bootRun
 
     - name: Run API Tests
       id: run-newman
