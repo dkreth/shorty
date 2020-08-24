@@ -1,0 +1,475 @@
+{
+	"info": {
+		"_postman_id": "43f17874-c900-4eb0-b81a-331326cfce38",
+		"name": "shorty tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31cf5978-79cb-433b-a5f3-c071937d2208",
+						"exec": [
+							"pm.test(\"correct JSON body\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.shortId).to.eql(\"test\");\r",
+							"    pm.expect(jsonData.longUrl).to.eql(\"test\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new record - dylan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d01be666-5d30-41ec-9340-97254ce71a56",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shortId\": \"dylan\",\r\n    \"longUrl\": \"dylankreth.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/generate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new record - googz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd2eacb6-0988-4d33-ab96-5b656b08d83a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shortId\": \"googz\",\r\n    \"longUrl\": \"google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/generate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new record - already exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "edff78dc-3f39-43c8-89f4-1ef198c40a36",
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shortId\": \"dylan\",\r\n    \"longUrl\": \"dylankreth.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/generate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dylan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a7333a6-dd44-47b2-8e4d-b38723e3f915",
+						"exec": [
+							"pm.test(\"Status code is 307\", function () {\r",
+							"    pm.response.to.have.status(307);\r",
+							"});\r",
+							"pm.test(\"Body matches dylankreth.com\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"dylankreth.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dylan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dylan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/googz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "957e3a30-f6ea-41ce-a049-8b7db144581a",
+						"exec": [
+							"pm.test(\"Status code is 307\", function () {\r",
+							"    pm.response.to.have.status(307);\r",
+							"});\r",
+							"pm.test(\"Body matches google.com\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"google.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/googz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"googz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c102a0a9-76b7-4209-9e8d-bab8e6574b5e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body contains JSON starter data\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('{\"shortId\":\"googz\",\"longUrl\":\"google.com\"}');\r",
+							"    pm.expect(pm.response.text()).to.include('{\"shortId\":\"dylan\",\"longUrl\":\"dylankreth.com\"}');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dylan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "570daa2f-8cb6-4ebb-add2-0bcfd8a33d39",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dylan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dylan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dylan - Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5704946e-e49a-4f71-85a8-06f940302bfe",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dylan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dylan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/googz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "280c39f8-0f55-424b-bfdc-e60a633fdf3b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shortId\": \"googz\",\r\n    \"longUrl\": \"bing.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/googz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"googz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/googz - after update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99555e4c-3913-4b38-8b51-a7ad66fdf197",
+						"exec": [
+							"pm.test(\"Status code is 307\", function () {\r",
+							"    pm.response.to.have.status(307);\r",
+							"});\r",
+							"pm.test(\"Body matches bing.com\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"bing.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/googz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"googz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/googz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d6c6232-f523-48e5-905f-dda2104d173a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/googz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"googz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/googz - Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73339eb0-382c-4bc2-9c07-a749113cb91c",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/googz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"googz"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
