@@ -1,0 +1,76 @@
+# Pulled directly from Matt Ball
+name: Newman Action
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ testingActions ]
+  pull_request:
+    branches: [ testingActions ]
+
+jobs:
+  newman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: install newman
+        run: npm install -g newman
+
+      - name: pls run newman
+        run: newman run postman_func_tests.json
+#      - uses: matt-ball/newman-action@master
+#        with:
+#          postmanApiKey: ${{ secrets.postmanApiKey }}
+#          collection: postman_func_tests.json
+#          environment: 5922408-228c7edd-fc15-4f68-9665-a35d7df6945b
+#  # You may pin to the exact commit or the version.
+#  # uses: matt-ball/newman-action@fc6b86948918c445f34fade22874059806dc43fc
+#  uses: matt-ball/newman-action@0.0.28
+#  with:
+#    # Postman API key
+#    apiKey: # optional, default is postmanApiKey
+#    # Collection to use
+#    collection: # optional, default is postman_collection.json
+#    # Environment to use
+#    environment: # optional, default is postman_environment.json
+#    # Globals to use
+#    globals: # optional
+#    # Number of iterations to run on the collection
+#    iterationCount: # optional, default is 1
+#    # Path to CSV or JSON data file
+#    iterationData: # optional
+#    # Name/ID of folders to run instead of entire collection
+#    folder: # optional
+#    # Path to be used as working directory
+#    workingDir: # optional
+#    # Allow reading files outside of working directory
+#    insecureFileRead: # optional, default is true
+#    # Time to wait for the collection run to complete
+#    timeout: # optional, default is Infinity
+#    # Time to wait for scripts to return a response
+#    timeoutRequest: # optional, default is Infinity
+#    # Time to wait for scripts to return a response
+#    timeoutScript: # optional, default is Infinity
+#    # Time to wait between subsequent requests
+#    delayRequest: # optional, default is 0
+#    # Follow 3xx responses
+#    ignoreRedirects: # optional
+#    # Disable SSL verification and allow self-signed SSL
+#    insecure: # optional
+#    # Stop collection run gracefully on error
+#    bail: # optional
+#    # Always exit cleanly
+#    suppressExitCode: # optional
+#    # Reporter to use
+#    reporters: # optional, default is cli
+#    # Reporter options
+#    reporter: # optional
+#    # Modify colored CLI output
+#    color: # optional, default is auto
+#    # Path to public client certificate
+#    sslClientCert: # optional
+#    # Path to secret client key file
+#    sslClientKey: # optional
+#    # Secret client key passphrase
+#    sslClientPassphrase: # optional
