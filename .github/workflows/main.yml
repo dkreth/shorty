@@ -31,3 +31,16 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Run API Tests
+      id: run-newman
+      uses: anthonyvscode/newman-action@v1
+      with:
+        collection: collection.json
+        reporters: cli
+
+    - name: Output summary to console
+      run: echo ${{ steps.run-api-tests.outputs.summary }}
