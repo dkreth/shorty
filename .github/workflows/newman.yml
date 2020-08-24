@@ -16,7 +16,7 @@ jobs:
       - uses: matt-ball/newman-action@master
         with:
 #          postmanApiKey: ${{ secrets.postmanApiKey }}
-          collection: ./src/integrationTests/postman_func_tests.json
+          collection: ./src/integrationTests/postman_func_testz.json
 #          environment: 5922408-228c7edd-fc15-4f68-9665-a35d7df6945b
 #  # You may pin to the exact commit or the version.
 #  # uses: matt-ball/newman-action@fc6b86948918c445f34fade22874059806dc43fc
