@@ -51,7 +51,7 @@ public class RecordController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(url, HttpStatus.PERMANENT_REDIRECT);
+        return new ResponseEntity<>(url, HttpStatus.TEMPORARY_REDIRECT);
     }
 
     @DeleteMapping("/{shortId}")
